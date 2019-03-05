@@ -1,24 +1,28 @@
+import sys
 def bindev(koren,num,mas):
     flag = False
     spis = []
-    rez = num+1
-    for i in range(len(mas)):
-        if mas[i]==koren:
-            flag = True
-            spis.append(i)
-    if flag:
-        rez = num+1
-        for j in range(len(spis)):
-            rez = bindev(spis[j],num+1,mas)
-    return rez
+    for i in range(len(koren)):
+        for j in range(len(mas)):
+            if koren[i]==mas[j]:
+                spis.append(j)
+    if len(spis)!=0:
+        num+=1
+        num = bindev(spis,num,mas)
+    return num
 n = int(input())
 mas = []
 num = 1
-koren = 0
+koren = []
+sys.setrecursionlimit(10000)
+x = input().split()
 for i in range(n):
-    x = int(input())
-    mas.append(x)
-    if x==-1:
-        koren = i
+    mas.append(int(x[i]))
+    if int(x[i])==-1:
+        koren.append(i)
 rez = bindev(koren,num,mas)
 print(rez)
+
+
+
+
