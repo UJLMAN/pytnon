@@ -9,6 +9,7 @@ if 1<=n<=100:
             for i in range(len(mas)):
                 sp.append(mas[i])
             sp.append(command)
+            a=0
             sl['command']=sp
             sp=[]
         else:
