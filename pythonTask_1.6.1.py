@@ -17,6 +17,7 @@ class Cls:
                 self.sl[str[0]] = sp
     def poisk(self,str):
         sp = []
+        rez = ''
         flag = False
         if self.sl.get(str[1])!=None:
             sp  = self.sl.get(str[1])
@@ -25,23 +26,33 @@ class Cls:
                     flag = True
                     break
             if flag:
-                print('Yes')
+                return 'Yes'
             else:
                 if str[0]==str[1]:
-                    print('Yes')
+                    return 'Yes'
                 else:
                     for i in range(len(sp)):
-                        self.poisk(str[0]+sp[i])
+                        if rez == 'Yes':
+                            break
+                        elif sp[i]=='None':
+                            rez = 'No'
+                        else:
+                            rez = self.poisk(str[0]+sp[i])
+                    return rez
         else:
-            print('No')
+            return  'No'
+
 
 n = int(input())
 Cl = Cls()
 for i in range(n):
-    str = input()
-    Cl.add(str.replace(' ',''))
+    str = input().split()
+    Cl.add(str)
 n = int(input())
-rez = ''
+rez = []
+
 for i in range(n):
-    str = input()
-    Cl.poisk(str.replace(' ',''))
+    str = input().split()
+    rez.append(Cl.poisk(str))
+for i in range(len(rez)):
+    print(rez[i])
